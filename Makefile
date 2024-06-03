@@ -22,3 +22,15 @@ lint: _pnpm
 
 analyze: _pnpm
 	@pnpm run analyze
+
+
+db-start:
+	@docker-compose up -d
+
+db-stop:
+	@docker-compose stop
+
+db-restart: db-stop db-start
+
+sql:
+	@docker-compose exec -it db mariadb -uroot -proot db
