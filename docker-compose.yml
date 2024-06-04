@@ -4,6 +4,9 @@ services:
   db:
     image: mariadb
     container_name: nextjs-cms-mariadb
+    hostname: nextjs-cms-mariadb
+    restart: on-failure
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
@@ -12,4 +15,4 @@ services:
     volumes:
       - data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "6612:3306"

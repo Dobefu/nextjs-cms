@@ -32,5 +32,13 @@ db-stop:
 
 db-restart: db-stop db-start
 
+db-init: _pnpm
+	@npx prisma migrate dev --name init
+	@npx prisma generate
+	@npx prisma db seed
+
+db-reset: _pnpm
+	@npx prisma migrate reset
+
 sql:
 	@docker-compose exec -it db mariadb -uroot -proot db
