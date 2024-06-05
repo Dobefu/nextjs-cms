@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      TEST
+      TEST PAGE
     </main>
   )
 }

@@ -15,4 +15,4 @@ services:
     volumes:
       - data:/var/lib/mysql
     ports:
-      - "6612:3306"
+      - '6612:3306'

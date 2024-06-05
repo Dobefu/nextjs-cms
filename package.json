@@ -1,5 +1,6 @@
 {
   "name": "nextjs-cms",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.1.4+sha256.30a1801ac4e723779efed13a21f4c39f9eb6c9fbb4ced101bce06b422593d7c9",
@@ -8,13 +9,14 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "5.14.0",
+    "clsx": "^2.1.1",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
@@ -29,6 +31,7 @@
     "eslint-config-next": "14.2.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint-plugin-tailwindcss": "^3.17.0",
     "postcss": "^8",
     "prisma": "^5.14.0",
     "tailwindcss": "^3.4.1",
