@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <main>
-      TEST PAGE
+    <main
+      className="flex-1 px-4"
+    >
+      HOME
     </main>
   )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import HeaderBase from '@/components/layout/header/HeaderBase/Component'
+import FooterBase from '@/components/layout/footer/FooterBase/Component'
 
 export const metadata: Metadata = {
   title: 'NextJS CMS',
@@ -17,6 +18,8 @@ export default function Layout({
       <HeaderBase />
 
       {children}
+
+      <FooterBase />
     </>
   )
 }

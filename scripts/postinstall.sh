@@ -10,5 +10,10 @@ cd "$SCRIPT_DIR/.." || exit 1
 
 # If the .env file doesn't exist, copy the example one.
 if [ ! -f ".env" ]; then
-  cp .env.example .env
+  # Generate a random secret for Auth.js.
+  AUTH_SECRET="$(openssl rand -base64 33)"
+
+  # Create a .env file from the .env.example file.
+  ENV="$(sed "s/^AUTH_SECRET=/AUTH_SECRET=\"\\$AUTH_SECRET\"/" .env.example)"
+  echo "$ENV" > .env
 fi

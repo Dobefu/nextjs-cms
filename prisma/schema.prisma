@@ -11,4 +11,8 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+  image String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -14,10 +14,10 @@ export default function Layout({
 }>) {
   return (
     <main
-      className="flex flex-1 gap-8"
+      className="flex flex-1 gap-4 p-4"
     >
       <div
-        className="flex-1 p-2"
+        className="flex-1"
       >
         <BaseImage
           className="size-full rounded-lg object-cover"

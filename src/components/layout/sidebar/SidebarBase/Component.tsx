@@ -1,12 +1,19 @@
+import SidebarAuthButtons from '../SidebarAuthButtons/Component'
+
 interface SidebarBaseProps {
-  children?: React.Component
+  children?: React.ReactNode
 }
 
-export default function SidebarBase({ children }: SidebarBaseProps) {
+export default async function SidebarBase({ children }: SidebarBaseProps) {
   return (
-    <>
+    <div
+      className="bg-zinc-300 p-4"
+    >
       SIDEBAR
+
       {children}
-    </>
+
+      <SidebarAuthButtons />
+    </div>
   )
 }

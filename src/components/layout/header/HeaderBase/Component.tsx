@@ -1,12 +1,18 @@
+import HeaderAuthButtons from '@/components/layout/header/HeaderAuthButtons/Component'
+
 interface HeaderBaseProps {
-  children?: React.Component
+  children?: React.ReactNode
 }
 
 export default function HeaderBase({ children }: HeaderBaseProps) {
   return (
-    <>
-      HEADER
+    <header
+      className="flex items-center justify-between p-4"
+    >
+      <h1>HEADER</h1>
+
+      <HeaderAuthButtons />
       {children}
-    </>
+    </header>
   )
 }

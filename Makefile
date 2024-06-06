@@ -1,7 +1,6 @@
 .PHONY: install build watch lint analyze
 
 export PATH := $(PATH)
-export NODE_TLS_REJECT_UNAUTHORIZED := 0
 
 default: build
 
@@ -33,7 +32,6 @@ db-stop:
 db-restart: db-stop db-start
 
 db-init: _pnpm
-	@npx prisma migrate dev --name init
 	@npx prisma generate
 	@npx prisma db seed
 

@@ -19,7 +19,7 @@ export default function RootLayout({
       lang="en"
     >
       <body
-        className="flex min-h-full flex-col"
+        className="flex min-h-full flex-col gap-4"
       >
         {children}
       </body>
