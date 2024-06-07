@@ -1,5 +1,9 @@
+import Link from 'next/link'
+import { Icon } from '@iconify/react'
+import userIcon from '@iconify/icons-mdi/user-outline'
+import logoutIcon from '@iconify/icons-mdi/logout'
 import { auth, signOut } from '@/auth'
-import BaseButton from '@/components/base/BaseButton/Component'
+import Button from '@/components/ui/Button/Component'
 
 interface SidebarAuthButtonsProps {
   children?: React.ReactNode
@@ -21,19 +25,36 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
         ? (
           <form
             action={logout}
-            className="flex justify-center"
           >
-            <BaseButton type="submit">
+            <Button
+              type="submit"
+              variant="outline"
+            >
+              <Icon
+                className="me-2 size-4"
+                icon={logoutIcon}
+                ssr
+              />
               Log out
-            </BaseButton>
+            </Button>
           </form>
           )
         : (
-          <BaseButton
-            href="/login"
+          <Button
+            variant="outline"
+            asChild
           >
-            CTA
-          </BaseButton>
+            <Link
+              href="/login"
+            >
+              <Icon
+                className="me-2 size-4"
+                icon={userIcon}
+                ssr
+              />
+              Log in
+            </Link>
+          </Button>
           )}
       {children}
     </>

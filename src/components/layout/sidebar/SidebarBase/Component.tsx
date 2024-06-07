@@ -1,3 +1,4 @@
+import { ThemeToggle } from '../../ThemeToggle/Component.client'
 import SidebarAuthButtons from '../SidebarAuthButtons/Component'
 
 interface SidebarBaseProps {
@@ -7,13 +8,22 @@ interface SidebarBaseProps {
 export default async function SidebarBase({ children }: SidebarBaseProps) {
   return (
     <div
-      className="bg-zinc-300 p-4"
+      className="flex min-w-64 flex-col p-6"
     >
-      SIDEBAR
+      <div
+        className="flex-1"
+      >
+        SIDEBAR
 
-      {children}
+        {children}
+      </div>
 
-      <SidebarAuthButtons />
+      <div
+        className="flex justify-between"
+      >
+        <SidebarAuthButtons />
+        <ThemeToggle />
+      </div>
     </div>
   )
 }

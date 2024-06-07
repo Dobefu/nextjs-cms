@@ -1,28 +1,19 @@
-import { Icon } from '@iconify/react'
 import { signIn } from '@/auth'
-import BaseButton from '@/components/base/BaseButton/Component'
+import LoginButtons from '@/components/molecules/LoginButtons/Component'
 
 export default async function Login() {
-  const login = async (formData: FormData) => {
+  const login = async (provider: string, formData: FormData) => {
     'use server'
-    await signIn('github', formData)
+    await signIn(provider, formData)
   }
 
   return (
     <main
-      className="w-full"
+      className="flex w-full justify-center"
     >
-      <form
-        action={login}
-        className="flex justify-center"
-      >
-        <BaseButton
-          type="submit"
-        >
-          <Icon icon="mdi:github" />
-          Log in with GitHub
-        </BaseButton>
-      </form>
+      <LoginButtons
+        onLogin={login}
+      />
     </main>
   )
 }

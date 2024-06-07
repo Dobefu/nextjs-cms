@@ -1,5 +1,9 @@
+import Link from 'next/link'
+import { Icon } from '@iconify/react'
+import userIcon from '@iconify/icons-mdi/user-outline'
+import logoutIcon from '@iconify/icons-mdi/logout'
 import { auth, signOut } from '@/auth'
-import BaseButton from '@/components/base/BaseButton/Component'
+import Button from '@/components/ui/Button/Component'
 
 interface HeaderAuthButtonsProps {
   children?: React.ReactNode
@@ -16,24 +20,40 @@ export default async function HeaderAuthButtons({ children }: HeaderAuthButtonsP
   }
 
   return (
-    <nav>
+    <nav
+      aria-label="User menu"
+    >
       {session?.user
         ? (
           <form
             action={logout}
             className="flex justify-center"
           >
-            <BaseButton type="submit">
+            <Button type="submit">
+              <Icon
+                className="me-2 size-4"
+                icon={logoutIcon}
+                ssr
+              />
               Log out
-            </BaseButton>
+            </Button>
           </form>
           )
         : (
-          <BaseButton
-            href="/login"
+          <Button
+            asChild
           >
-            CTA
-          </BaseButton>
+            <Link
+              href="/login"
+            >
+              <Icon
+                className="me-2 size-4"
+                icon={userIcon}
+                ssr
+              />
+              Log in
+            </Link>
+          </Button>
           )}
 
       {children}

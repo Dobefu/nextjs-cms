@@ -5,6 +5,7 @@ export default antfu(
   {
     react: true,
     typescript: true,
+    isInEditor: false,
   },
   {
     ignores: [

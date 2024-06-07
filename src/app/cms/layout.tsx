@@ -14,11 +14,19 @@ export default function Layout({
 }>) {
   return (
     <div
-      className="flex flex-1"
+      className="flex flex-1 bg-accent"
     >
       <SidebarBase />
 
-      {children}
+      <main
+        className="flex flex-1 p-2"
+      >
+        <div
+          className="flex flex-1 rounded-lg bg-background p-4 shadow-lg"
+        >
+          {children}
+        </div>
+      </main>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import BaseImage from '@/components/base/BaseImage/Component'
+import BaseImage from '@/components/ui/Image/Component'
 
 export const metadata: Metadata = {
   title: 'Login | NextJS CMS',
