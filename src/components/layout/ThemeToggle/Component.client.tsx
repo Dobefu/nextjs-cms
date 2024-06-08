@@ -41,13 +41,22 @@ export function ThemeToggle() {
       </Button>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme('light')}>
+          <Icon
+            className="me-2 size-[1.2rem]"
+            icon={sunIcon}
+            ssr
+          />
+
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
+          <Icon
+            className="me-2 size-[1.2rem]"
+            icon={moonIcon}
+            ssr
+          />
+
           Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

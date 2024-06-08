@@ -1,29 +1,19 @@
-import { ThemeToggle } from '../../ThemeToggle/Component.client'
-import SidebarAuthButtons from '../SidebarAuthButtons/Component'
+import { cookies } from 'next/headers'
+import Client from './Component.client'
 
 interface SidebarBaseProps {
   children?: React.ReactNode
 }
 
 export default async function SidebarBase({ children }: SidebarBaseProps) {
+  const isOpenInitial = cookies().get('sidebar-open')?.value === 'true'
+
   return (
-    <div
-      className="flex min-w-64 flex-col p-6"
+    <Client
+      isOpenInitial={isOpenInitial}
     >
-      <div
-        className="flex-1"
-      >
-        SIDEBAR
 
-        {children}
-      </div>
-
-      <div
-        className="flex justify-between"
-      >
-        <SidebarAuthButtons />
-        <ThemeToggle />
-      </div>
-    </div>
+      {children}
+    </Client>
   )
 }

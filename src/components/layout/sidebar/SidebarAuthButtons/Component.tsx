@@ -1,9 +1,8 @@
-import Link from 'next/link'
 import { Icon } from '@iconify/react'
-import userIcon from '@iconify/icons-mdi/user-outline'
 import logoutIcon from '@iconify/icons-mdi/logout'
 import { auth, signOut } from '@/auth'
-import Button from '@/components/ui/Button/Component'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar/Component.client'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/DropdownMenu/Component.client'
 
 interface SidebarAuthButtonsProps {
   children?: React.ReactNode
@@ -19,43 +18,60 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
     })
   }
 
+  const initials = session?.user?.name?.split(' ')
+    .filter((_name: string, index: number) => index !== 1)
+    .map((name: string) => name[0])
+    .join('')
+
   return (
     <>
-      {session?.user
-        ? (
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+        >
+          <Avatar
+            className="cursor-pointer"
+            role="button"
+          >
+            <AvatarImage
+              src={session?.user?.image ?? ''}
+              alt={session?.user?.name ?? ''}
+            />
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent
+          align="start"
+        >
           <form
             action={logout}
           >
-            <Button
-              type="submit"
-              variant="outline"
+            <DropdownMenuLabel>
+              {session?.user?.name}
+            </DropdownMenuLabel>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              asChild
             >
-              <Icon
-                className="me-2 size-4"
-                icon={logoutIcon}
-                ssr
-              />
-              Log out
-            </Button>
+              <button
+                className="flex w-full cursor-pointer items-center"
+                type="submit"
+              >
+                <Icon
+                  className="me-2 size-4"
+                  icon={logoutIcon}
+                  ssr
+                />
+                Log out
+              </button>
+            </DropdownMenuItem>
           </form>
-          )
-        : (
-          <Button
-            variant="outline"
-            asChild
-          >
-            <Link
-              href="/login"
-            >
-              <Icon
-                className="me-2 size-4"
-                icon={userIcon}
-                ssr
-              />
-              Log in
-            </Link>
-          </Button>
-          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
       {children}
     </>
   )

@@ -21,7 +21,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className="flex min-h-full flex-col gap-4"
+        className="flex min-h-full flex-col gap-4 antialiased"
       >
         <ThemeProvider
           attribute="class"
