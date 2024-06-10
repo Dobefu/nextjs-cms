@@ -6,13 +6,12 @@ interface SidebarBaseProps {
 }
 
 export default async function SidebarBase({ children }: SidebarBaseProps) {
-  const isOpenInitial = cookies().get('sidebar-open')?.value === 'true'
+  const isOpenInitial = (cookies().get('sidebar-open')?.value ?? 'true') === 'true'
 
   return (
     <Client
       isOpenInitial={isOpenInitial}
     >
-
       {children}
     </Client>
   )

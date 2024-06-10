@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import Client from './Component.client'
 
 export default function SidebarCollapse() {
-  const isOpenInitial = cookies().get('sidebar-open')?.value === 'true'
+  const isOpenInitial = (cookies().get('sidebar-open')?.value ?? 'true') === 'true'
 
   return (
     <Client
