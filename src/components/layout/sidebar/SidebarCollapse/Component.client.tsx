@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react'
 import chevronRightIcon from '@iconify/icons-mdi/chevron-right'
 import chevronLeftIcon from '@iconify/icons-mdi/chevron-left'
 import { useCookies } from 'react-cookie'
+import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button/Component'
 
 interface SidebarCollapseProps {
@@ -12,6 +13,11 @@ interface SidebarCollapseProps {
 
 export default function Client({ isOpenInitial }: SidebarCollapseProps) {
   const [cookies, setCookie] = useCookies(['sidebar-open'])
+  const [sidebarOpen, setSidebarOpen] = useState(cookies['sidebar-open'] ?? isOpenInitial)
+
+  useEffect(() => {
+    setSidebarOpen((cookies['sidebar-open'] ?? isOpenInitial))
+  }, [cookies, isOpenInitial])
 
   const toggleOpenState = () => {
     setCookie('sidebar-open', !(cookies['sidebar-open'] ?? true), {
@@ -22,13 +28,15 @@ export default function Client({ isOpenInitial }: SidebarCollapseProps) {
 
   return (
     <Button
+      className="max-lg:hidden"
       variant="outline"
       size="icon"
       onClick={toggleOpenState}
+      aria-label={sidebarOpen ? 'Collapse menu' : 'Expand menu'}
     >
       <Icon
         className="size-[1.2rem]"
-        icon={(cookies['sidebar-open'] ?? isOpenInitial) ? chevronLeftIcon : chevronRightIcon}
+        icon={sidebarOpen ? chevronLeftIcon : chevronRightIcon}
         ssr
       />
     </Button>

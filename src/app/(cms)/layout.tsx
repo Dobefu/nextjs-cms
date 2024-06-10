@@ -21,7 +21,7 @@ export default function Layout({
     >
       <SidebarBase>
         <div
-          className="flex flex-wrap justify-between gap-4 p-4"
+          className="flex flex-wrap justify-between gap-4 p-4 max-md:p-2"
         >
           <SidebarAuthButtons />
 
@@ -37,7 +37,7 @@ export default function Layout({
         className="flex flex-1 p-2 ps-0"
       >
         <main
-          className="flex flex-1 flex-col overflow-auto rounded-lg border bg-card p-8 shadow-lg"
+          className="flex flex-1 flex-col overflow-auto rounded-lg border bg-card p-8 shadow-lg max-md:p-4"
           id="main"
         >
           {children}

@@ -16,16 +16,16 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
   return (
     <div
       className={cn(
-        'flex flex-col transition-all overflow-hidden gap-8',
+        'flex flex-col transition-all overflow-hidden gap-8 max-lg:w-20 shrink-0 max-md:w-16',
         (cookies['sidebar-open'] ?? isOpenInitial) ? 'w-80' : 'w-20',
       )}
     >
       <div
-        className="flex flex-1 flex-col gap-4 overflow-x-auto p-4"
+        className="flex flex-1 flex-col gap-4 overflow-x-auto p-4 max-md:p-2"
       >
         <h1
           className={cn(
-            'flex items-center gap-4 text-xl font-semibold text-foreground',
+            'flex items-center gap-4 text-xl font-semibold text-foreground max-lg:p-2',
             (cookies['sidebar-open'] ?? isOpenInitial) ? 'p-4' : 'p-2',
           )}
         >
@@ -39,6 +39,7 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
 
           <span
             className={cn(
+              'max-lg:sr-only',
               (cookies['sidebar-open'] ?? isOpenInitial) ? '' : 'sr-only',
             )}
           >

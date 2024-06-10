@@ -60,14 +60,14 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
             >
               <Link
                 className={cn(
-                  'group flex items-center gap-4 rounded-md text-lg hover:bg-accent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
+                  'group flex items-center gap-4 rounded-md text-lg hover:bg-accent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background max-lg:p-3',
                   isExpanded ? 'p-4' : 'p-3',
                 )}
                 href={menuItem.url}
               >
                 <Icon
                   className={cn(
-                    'shrink-0 transition-all group-hover:-rotate-6 group-hover:scale-125',
+                    'shrink-0 transition-all group-hover:-rotate-6 group-hover:scale-125 max-lg:size-6',
                     isExpanded ? 'size-5' : 'size-6',
                   )}
                   icon={menuItem.icon}
@@ -76,7 +76,7 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
 
                 <span
                   className={cn(
-                    'flex-1 font-medium',
+                    'flex-1 font-medium max-lg:sr-only',
                     isExpanded ? '' : 'sr-only',
                   )}
                 >
@@ -86,7 +86,7 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
                 {isExpanded
                   ? (
                     <Icon
-                      className="size-[1.2rem] shrink-0 transition-transform group-hover:translate-x-1"
+                      className="size-[1.2rem] shrink-0 transition-transform group-hover:translate-x-1 max-lg:hidden"
                       icon={chevronRightIcon}
                       ssr
                     />

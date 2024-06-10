@@ -21,7 +21,7 @@ export default async function Page() {
 
   return (
     <div
-      className="flex gap-8"
+      className="flex flex-wrap gap-8"
     >
       <BaseImage
         src={userData.image ?? ''}
