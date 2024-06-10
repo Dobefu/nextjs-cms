@@ -11,7 +11,9 @@ export default function Client({ children }: FooterBaseProps) {
     >
       <h1>FOOTER</h1>
 
-      <ThemeToggle />
+      <ThemeToggle
+        align="end"
+      />
 
       {children}
     </footer>

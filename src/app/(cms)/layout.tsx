@@ -21,10 +21,14 @@ export default function Layout({
     >
       <SidebarBase>
         <div
-          className="flex flex-wrap justify-between gap-4"
+          className="flex flex-wrap justify-between gap-4 p-4"
         >
           <SidebarAuthButtons />
-          <ThemeToggle />
+
+          <ThemeToggle
+            align="start"
+          />
+
           <SidebarCollapse />
         </div>
       </SidebarBase>

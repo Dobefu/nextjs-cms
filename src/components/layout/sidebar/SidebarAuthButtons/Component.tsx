@@ -1,5 +1,7 @@
 import { Icon } from '@iconify/react'
 import logoutIcon from '@iconify/icons-mdi/logout'
+import accountIcon from '@iconify/icons-mdi/account'
+import Link from 'next/link'
 import { auth, signOut } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar/Component.client'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/DropdownMenu/Component.client'
@@ -13,6 +15,7 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
 
   const logout = async () => {
     'use server'
+
     await signOut({
       redirectTo: '/login',
     })
@@ -56,6 +59,22 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
             <DropdownMenuItem
               asChild
             >
+              <Link
+                href="/profile"
+                className="cursor-pointer"
+              >
+                <Icon
+                  className="me-2 size-4"
+                  icon={accountIcon}
+                  ssr
+                />
+
+                Profile
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              asChild
+            >
               <button
                 className="flex w-full cursor-pointer items-center"
                 type="submit"
@@ -65,6 +84,7 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
                   icon={logoutIcon}
                   ssr
                 />
+
                 Log out
               </button>
             </DropdownMenuItem>

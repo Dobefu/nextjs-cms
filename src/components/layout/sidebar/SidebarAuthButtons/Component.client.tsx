@@ -30,6 +30,7 @@ export default async function Client({ children, session }: SidebarAuthButtonsPr
         />
         Log out
       </Button>
+
       <Avatar>
         <AvatarImage
           src={session?.user?.image ?? ''}
