@@ -16,12 +16,12 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
   return (
     <div
       className={cn(
-        'flex flex-col transition-all overflow-hidden p-4',
+        'flex flex-col transition-all overflow-hidden p-4 gap-8',
         (cookies['sidebar-open'] ?? isOpenInitial) ? 'w-80' : 'w-20',
       )}
     >
       <div
-        className="flex flex-1 flex-col gap-4"
+        className="flex flex-1 flex-col gap-4 overflow-auto"
       >
         <h1
           className={cn(

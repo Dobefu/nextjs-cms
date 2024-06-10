@@ -17,7 +17,7 @@ export default function Layout({
 }>) {
   return (
     <div
-      className="flex flex-1 bg-background"
+      className="flex max-h-screen flex-1 bg-background"
     >
       <SidebarBase>
         <div
@@ -29,16 +29,16 @@ export default function Layout({
         </div>
       </SidebarBase>
 
-      <main
+      <div
         className="flex flex-1 p-2 ps-0"
-        id="main"
       >
-        <div
-          className="flex flex-1 rounded-lg border bg-card p-4 shadow-lg"
+        <main
+          className="flex flex-1 flex-col overflow-auto rounded-lg border bg-card p-8 shadow-lg"
+          id="main"
         >
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   )
 }

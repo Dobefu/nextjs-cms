@@ -1,7 +1,7 @@
+import PageTitle from '@/components/molecules/PageTitle/Component'
+
 export default function Content() {
   return (
-    <>
-      CONTENT
-    </>
+    <PageTitle>CONTENT</PageTitle>
   )
 }

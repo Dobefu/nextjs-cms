@@ -14,7 +14,10 @@ export default function Client({ isOpenInitial }: SidebarCollapseProps) {
   const [cookies, setCookie] = useCookies(['sidebar-open'])
 
   const toggleOpenState = () => {
-    setCookie('sidebar-open', !(cookies['sidebar-open'] ?? true))
+    setCookie('sidebar-open', !(cookies['sidebar-open'] ?? true), {
+      path: '/',
+      expires: new Date(Date.now() + 31536000_000), // 1 year
+    })
   }
 
   return (

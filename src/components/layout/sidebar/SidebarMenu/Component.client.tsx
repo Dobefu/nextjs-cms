@@ -7,6 +7,7 @@ import dashboardIcon from '@iconify/icons-mdi/view-dashboard'
 import chevronRightIcon from '@iconify/icons-mdi/chevron-right'
 import cogIcon from '@iconify/icons-mdi/cog'
 import imageIcon from '@iconify/icons-mdi/folder-image'
+import contentTypeIcon from '@iconify/icons-mdi/hammer-wrench'
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip/Component.client'
 
@@ -32,6 +33,11 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
       icon: imageIcon,
     },
     {
+      title: 'Content types',
+      url: '/cms/content-types',
+      icon: contentTypeIcon,
+    },
+    {
       title: 'Settings',
       url: '/cms/settings',
       icon: cogIcon,
@@ -49,7 +55,9 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
           <Tooltip
             key={menuItem.title}
           >
-            <Comp>
+            <Comp
+              tabIndex={-1}
+            >
               <Link
                 className={cn(
                   'group flex items-center gap-4 rounded-md text-lg hover:bg-accent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
