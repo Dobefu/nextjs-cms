@@ -1,9 +1,9 @@
 'use client'
 
 import { useCookies } from 'react-cookie'
-import Image from 'next/image'
 import SidebarMenu from '../SidebarMenu/Component.client'
 import { cn } from '@/lib/utils'
+import BaseImage from '@/components/ui/Image/Component'
 
 interface SidebarBaseProps {
   children?: React.ReactNode
@@ -29,7 +29,7 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
             (cookies['sidebar-open'] ?? isOpenInitial) ? 'p-4' : 'p-2',
           )}
         >
-          <Image
+          <BaseImage
             src="/logo.svg"
             alt="Logo"
             height={32}
