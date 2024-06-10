@@ -31,6 +31,7 @@ export default function Layout({
 
       <main
         className="flex flex-1 p-2 ps-0"
+        id="main"
       >
         <div
           className="flex flex-1 rounded-lg border bg-card p-4 shadow-lg"

@@ -15,6 +15,7 @@ export default function Layout({
   return (
     <main
       className="flex flex-1 gap-4 p-4"
+      id="main"
     >
       <div
         className="flex-1"
