@@ -21,7 +21,7 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
       )}
     >
       <div
-        className="flex flex-1 flex-col gap-4 overflow-x-auto p-4 max-md:p-2"
+        className="flex flex-1 flex-col gap-4 overflow-y-auto p-4 max-md:p-2"
       >
         <h1
           className={cn(
