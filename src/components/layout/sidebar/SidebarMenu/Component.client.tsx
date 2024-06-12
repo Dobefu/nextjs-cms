@@ -21,26 +21,31 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
       title: 'Dashboard',
       url: '/cms',
       icon: dashboardIcon,
+      className: '',
     },
     {
       title: 'Content',
       url: '/cms/content',
       icon: documentIcon,
+      className: '',
     },
     {
       title: 'Assets',
       url: '/cms/assets',
       icon: imageIcon,
+      className: '',
     },
     {
       title: 'Content types',
       url: '/cms/content-types',
       icon: contentTypeIcon,
+      className: '',
     },
     {
       title: 'Settings',
       url: '/cms/settings',
       icon: cogIcon,
+      className: '',
     },
   ]
 
@@ -67,8 +72,9 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
               >
                 <Icon
                   className={cn(
-                    'shrink-0 transition-all group-hover:-rotate-6 group-hover:scale-125 max-lg:size-6',
+                    'shrink-0 transition-all group-active:rotate-3 group-active:scale-90 group-hover:-rotate-3 group-focus:-rotate-3 group-focus:scale-125 group-hover:scale-125 max-lg:size-6',
                     isExpanded ? 'size-5' : 'size-6',
+                    menuItem.className,
                   )}
                   icon={menuItem.icon}
                   ssr
