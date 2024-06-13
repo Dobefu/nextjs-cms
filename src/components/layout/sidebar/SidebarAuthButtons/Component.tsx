@@ -33,14 +33,18 @@ export default async function SidebarAuthButtons({ children }: SidebarAuthButton
           asChild
         >
           <Avatar
-            className="cursor-pointer"
-            role="button"
+            asChild
           >
-            <AvatarImage
-              src={session?.user?.image ?? ''}
-              alt={session?.user?.name ?? ''}
-            />
-            <AvatarFallback>{initials}</AvatarFallback>
+            <button
+              className="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              type="button"
+            >
+              <AvatarImage
+                src={session?.user?.image ?? ''}
+                alt={session?.user?.name ?? ''}
+              />
+              <AvatarFallback>{initials}</AvatarFallback>
+            </button>
           </Avatar>
         </DropdownMenuTrigger>
 
