@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Urbanist as Font } from 'next/font/google'
+import { Inter as Font } from 'next/font/google'
 
 import '@/app/globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider/Component.client'
