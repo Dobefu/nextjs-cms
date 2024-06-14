@@ -5,7 +5,7 @@ import chevronRightIcon from '@iconify/icons-mdi/chevron-right'
 import chevronLeftIcon from '@iconify/icons-mdi/chevron-left'
 import { useCookies } from 'react-cookie'
 import { useEffect, useState } from 'react'
-import Button from '@/components/ui/Button/Component'
+import Button from '@/components/ui/Button/Component.client'
 
 interface SidebarCollapseProps {
   isOpenInitial: boolean

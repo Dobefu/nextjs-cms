@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 import userIcon from '@iconify/icons-mdi/user-outline'
 import logoutIcon from '@iconify/icons-mdi/logout'
 import { auth, signOut } from '@/auth'
-import Button from '@/components/ui/Button/Component'
+import Button from '@/components/ui/Button/Component.client'
 
 interface HeaderAuthButtonsProps {
   children?: React.ReactNode

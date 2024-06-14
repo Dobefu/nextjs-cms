@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes'
 import { Icon } from '@iconify/react'
 import sunIcon from '@iconify/icons-mdi/white-balance-sunny'
 import moonIcon from '@iconify/icons-mdi/moon-and-stars'
-import Button from '@/components/ui/Button/Component'
+import Button from '@/components/ui/Button/Component.client'
 import {
   DropdownMenu,
   DropdownMenuContent,

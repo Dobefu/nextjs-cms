@@ -36,7 +36,7 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
       className: '',
     },
     {
-      title: 'Content types',
+      title: 'Content Types',
       url: '/cms/content-types',
       icon: contentTypeIcon,
       className: '',

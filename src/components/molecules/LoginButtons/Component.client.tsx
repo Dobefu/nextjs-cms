@@ -2,7 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import githubIcon from '@iconify/icons-mdi/github'
-import Button from '@/components/ui/Button/Component'
+import Button from '@/components/ui/Button/Component.client'
 
 interface LoginButtonProps {
   onLogin: (provider: string, data: FormData) => void

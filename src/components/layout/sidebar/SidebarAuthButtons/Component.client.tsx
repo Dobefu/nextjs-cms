@@ -3,7 +3,7 @@
 import { Icon } from '@iconify/react'
 import logoutIcon from '@iconify/icons-mdi/logout'
 import type { Session } from 'next-auth'
-import Button from '@/components/ui/Button/Component'
+import Button from '@/components/ui/Button/Component.client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar/Component.client'
 
 interface SidebarAuthButtonsProps {
