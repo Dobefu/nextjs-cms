@@ -30,6 +30,7 @@ export default function Client({ children, isOpenInitial }: SidebarBaseProps) {
           )}
         >
           <BaseImage
+            className="max-w-8 max-lg:size-full"
             src="/logo.svg"
             alt="Logo"
             height={32}

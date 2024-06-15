@@ -4,6 +4,7 @@ import dotsVerticalIcon from '@iconify/icons-mdi/dots-vertical'
 import { Icon } from '@iconify/react'
 import type { ColumnDef, RowData, SortingColumn } from '@tanstack/react-table'
 import sortIcon from '@iconify/icons-mdi/sort'
+import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button/Component.client'
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/DropdownMenu/Component.client'
@@ -12,7 +13,7 @@ import { DataTable } from '@/components/ui/DataTable/Component.client'
 interface ContentTypes {
   id: string
   title: string
-  lastmod: string
+  lastmod: number
 }
 
 interface OverviewProps {
@@ -20,6 +21,12 @@ interface OverviewProps {
 }
 
 export default function Client({ contentTypes }: OverviewProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const columns: ColumnDef<ContentTypes, RowData>[] = [
     {
       accessorKey: 'title',
@@ -43,13 +50,14 @@ export default function Client({ contentTypes }: OverviewProps) {
       },
     },
     {
+      id: 'lastmod',
       accessorKey: 'lastmod',
       header: ({ column }: { column: SortingColumn<ContentTypes> }) => {
         return (
           <Button
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-            className="-mx-3 max-md:-mx-2 max-md:h-full max-md:rounded-none max-md:px-2"
+            className="-mx-3 max-md:-mx-2 max-md:h-full max-md:rounded-none max-md:px-2 max-sm:hidden"
             size="sm"
           >
             Last Modified
@@ -62,10 +70,19 @@ export default function Client({ contentTypes }: OverviewProps) {
           </Button>
         )
       },
+      cell: ({ row }) => {
+        return (
+          <span
+            className="max-sm:hidden"
+          >
+            {isClient ? new Date(row.getValue('lastmod')).toLocaleString() : ''}
+          </span>
+        )
+      },
     },
     {
       id: 'actions',
-      cell: ({ row: _row }: { row: RowData }) => {
+      cell: ({ row: _row }) => {
         return (
           <div
             className="text-right"
@@ -110,6 +127,7 @@ export default function Client({ contentTypes }: OverviewProps) {
       filter={{
         field: 'title',
       }}
+      noResultsText="No content types yet."
     />
   )
 }

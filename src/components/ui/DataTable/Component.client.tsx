@@ -35,6 +35,7 @@ interface DataTableProps<TData, TValue> {
     placeholder?: string
     field: string
   }
+  noResultsText?: string
 }
 
 export function DataTable<TData, TValue>({
@@ -42,6 +43,7 @@ export function DataTable<TData, TValue>({
   data,
   pageSize,
   filter,
+  noResultsText,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
@@ -122,7 +124,7 @@ export function DataTable<TData, TValue>({
             : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {noResultsText ?? 'No results.'}
                 </TableCell>
               </TableRow>
               )}
@@ -133,8 +135,6 @@ export function DataTable<TData, TValue>({
         ? (
           <div className="flex items-center justify-center space-x-2 py-4">
             <Button
-              variant="outline"
-              size="sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -142,8 +142,6 @@ export function DataTable<TData, TValue>({
             </Button>
 
             <Button
-              variant="outline"
-              size="sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >

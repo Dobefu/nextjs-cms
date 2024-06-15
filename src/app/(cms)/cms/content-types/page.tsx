@@ -9,7 +9,7 @@ export default function ContentTypes() {
   return (
     <>
       <div
-        className="flex items-center justify-between pb-8"
+        className="flex items-center justify-between gap-4 pb-8"
       >
         <PageTitle className="pb-0">
           Content Types
@@ -22,6 +22,7 @@ export default function ContentTypes() {
           asChild
         >
           <Link
+            className="shrink-0"
             href="/cms/content-types/create"
           >
             <Icon
