@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react'
 import type { ColumnDef, RowData, SortingColumn } from '@tanstack/react-table'
 import sortIcon from '@iconify/icons-mdi/sort'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import Button from '@/components/ui/Button/Component.client'
 import {
   DropdownMenu,
@@ -88,7 +89,7 @@ export default function Client({ contentTypes }: OverviewProps) {
     },
     {
       id: 'actions',
-      cell: ({ row: _row }) => {
+      cell: ({ row }) => {
         return (
           <div
             className="text-right"
@@ -112,8 +113,13 @@ export default function Client({ contentTypes }: OverviewProps) {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  Edit content type
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={`/cms/content-types/edit/${row.original.id}`}
+                    className="cursor-pointer"
+                  >
+                    Edit content type
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   Delete content type

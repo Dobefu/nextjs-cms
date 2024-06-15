@@ -51,7 +51,10 @@ export function ThemeToggle({ align }: ThemeToggleProps) {
             </TooltipTrigger>
           </Button>
           <DropdownMenuContent align={align}>
-            <DropdownMenuItem onClick={() => setTheme('light')}>
+            <DropdownMenuItem
+              onClick={() => setTheme('light')}
+              className="cursor-pointer"
+            >
               <Icon
                 className="me-2 size-[1.2rem] text-amber-500"
                 icon={sunIcon}
@@ -60,7 +63,10 @@ export function ThemeToggle({ align }: ThemeToggleProps) {
 
               Light
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
+            <DropdownMenuItem
+              onClick={() => setTheme('dark')}
+              className="cursor-pointer"
+            >
               <Icon
                 className="me-2 size-[1.2rem] text-slate-600 dark:text-slate-400"
                 icon={moonIcon}

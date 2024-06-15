@@ -3,14 +3,21 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import saveIcon from '@iconify/icons-mdi/content-save'
+import loadingIcon from '@iconify/icons-mdi/loading'
+import { Icon } from '@iconify/react'
 import upsertContentType from '../../actions/upsert-content-type'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form/Component'
 import { Input } from '@/components/ui/Input/Component.client'
 import Button from '@/components/ui/Button/Component.client'
+import { cn } from '@/lib/utils'
+import { toast } from '@/hooks/useToast'
 
 interface EditFormProps {
   id?: number
   action: 'create' | 'edit'
+  defaultValues?: { [key: string]: string | number }
 }
 
 const formSchema = z.object({
@@ -25,16 +32,51 @@ const formSchema = z.object({
 
 export type EditFormSchema = z.infer<typeof formSchema>
 
-export default function EditForm({ id, action }: EditFormProps) {
+export default function EditForm({ id, action, defaultValues }: EditFormProps) {
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
+      ...defaultValues,
     },
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await upsertContentType(values, id)
+    setIsLoading(true)
+    const { success } = await upsertContentType(values, id)
+
+    const toastData: {
+      title: string
+      description?: string
+      variant?: 'destructive' | 'default'
+    } = {
+      title: '',
+      description: undefined,
+    }
+
+    if (success) {
+      if (action === 'create')
+        toastData.title = 'The content type has been created!'
+      if (action === 'edit')
+        toastData.title = 'The content type has been updated!'
+    }
+    else {
+      if (action === 'create')
+        toastData.title = 'Could not create the content type'
+      if (action === 'edit')
+        toastData.title = 'Could not update the content type'
+
+      toastData.description = 'Please try again later'
+      toastData.variant = 'destructive'
+    }
+
+    toast(toastData)
+
+    // Leave the submit button disabled for a second, to prevent spamming.
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    setIsLoading(false)
   }
 
   return (
@@ -68,7 +110,17 @@ export default function EditForm({ id, action }: EditFormProps) {
         <Button
           className="sm:mr-auto"
           type="submit"
+          disabled={isLoading}
         >
+          <Icon
+            className={cn(
+              'me-2 size-4',
+              isLoading ? 'animate-spin' : '',
+            )}
+            icon={isLoading ? loadingIcon : saveIcon}
+            ssr
+          />
+
           {action === 'create' ? 'Create' : undefined}
           {action === 'edit' ? 'Update' : undefined}
         </Button>

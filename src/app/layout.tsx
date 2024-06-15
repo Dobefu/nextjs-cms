@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { Inter as Font } from 'next/font/google'
 
 import '@/app/globals.css'
-import { ThemeProvider } from '@/components/ThemeProvider/Component.client'
+import { ThemeProvider } from 'next-themes'
 import SkipToMain from '@/components/layout/SkipToMain/Component'
 import { cn } from '@/lib/utils'
+import { Toaster } from '@/components/ui/Toaster/Component.client'
 
 const font = Font({
   subsets: ['latin'],
@@ -29,16 +30,22 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className="flex min-h-full flex-col gap-4 antialiased"
+        className="flex min-h-full flex-col antialiased"
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           disableTransitionOnChange
         >
-          <SkipToMain />
+          <div
+            className="flex min-h-full flex-1 flex-col gap-4"
+          >
+            <SkipToMain />
 
-          {children}
+            {children}
+          </div>
+
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
