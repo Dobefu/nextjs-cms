@@ -16,7 +16,8 @@ export default function ContentTypes() {
         </PageTitle>
 
         <Button
-          variant="outline"
+          className="group"
+          variant="success"
           size="icon"
           aria-label="Add content type"
           asChild
@@ -26,6 +27,7 @@ export default function ContentTypes() {
             href="/cms/content-types/create"
           >
             <Icon
+              className="size-5 transition-transform group-hover:scale-125"
               icon={plusIcon}
               ssr
             />

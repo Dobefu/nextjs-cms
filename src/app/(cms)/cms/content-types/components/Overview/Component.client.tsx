@@ -6,18 +6,24 @@ import type { ColumnDef, RowData, SortingColumn } from '@tanstack/react-table'
 import sortIcon from '@iconify/icons-mdi/sort'
 import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button/Component.client'
-
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/DropdownMenu/Component.client'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/DropdownMenu/Component.client'
 import { DataTable } from '@/components/ui/DataTable/Component.client'
 
-interface ContentTypes {
-  id: string
+interface ContentType {
+  id: number
   title: string
   lastmod: number
 }
 
 interface OverviewProps {
-  contentTypes: ContentTypes[]
+  contentTypes: ContentType[]
 }
 
 export default function Client({ contentTypes }: OverviewProps) {
@@ -27,10 +33,10 @@ export default function Client({ contentTypes }: OverviewProps) {
     setIsClient(true)
   }, [])
 
-  const columns: ColumnDef<ContentTypes, RowData>[] = [
+  const columns: ColumnDef<ContentType, RowData>[] = [
     {
       accessorKey: 'title',
-      header: ({ column }: { column: SortingColumn<ContentTypes> }) => {
+      header: ({ column }: { column: SortingColumn<ContentType> }) => {
         return (
           <Button
             variant="ghost"
@@ -52,7 +58,7 @@ export default function Client({ contentTypes }: OverviewProps) {
     {
       id: 'lastmod',
       accessorKey: 'lastmod',
-      header: ({ column }: { column: SortingColumn<ContentTypes> }) => {
+      header: ({ column }: { column: SortingColumn<ContentType> }) => {
         return (
           <Button
             variant="ghost"

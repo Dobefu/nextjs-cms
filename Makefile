@@ -1,4 +1,4 @@
-.PHONY: install build watch lint analyze
+.PHONY: install build watch lint analyze db-start db-stop db-restart db-init db-reset db-migrate sql
 
 export PATH := $(PATH)
 
@@ -37,6 +37,11 @@ db-init: _pnpm
 
 db-reset: _pnpm
 	@npx prisma migrate reset
+	@npx prisma generate
+	@npx prisma db seed
+
+db-migrate: _pnpm
+	@npx prisma migrate dev
 
 sql:
 	@docker-compose exec -it db mariadb -uroot -proot db
