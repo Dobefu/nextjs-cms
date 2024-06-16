@@ -8,6 +8,10 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <PageTitle>DASHBOARD</PageTitle>
+    <PageTitle
+      className="mb-8 max-md:mb-4"
+    >
+      DASHBOARD
+    </PageTitle>
   )
 }

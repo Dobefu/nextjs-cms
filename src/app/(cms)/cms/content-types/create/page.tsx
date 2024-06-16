@@ -14,7 +14,7 @@ export default function Create() {
   return (
     <>
       <Link
-        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
+        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:mb-4"
         href="/cms/content-types"
       >
         <Icon
@@ -26,7 +26,11 @@ export default function Create() {
         Back to overview
       </Link>
 
-      <PageTitle>Create a Content Type</PageTitle>
+      <PageTitle
+        className="mb-8 max-md:mb-4"
+      >
+        Create a Content Type
+      </PageTitle>
 
       <EditForm
         action="create"

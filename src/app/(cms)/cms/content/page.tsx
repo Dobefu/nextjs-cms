@@ -15,11 +15,9 @@ export default function Content() {
   return (
     <>
       <div
-        className="mb-8 flex items-center justify-between gap-4"
+        className="mb-8 flex items-center justify-between gap-4 max-md:mb-4"
       >
-        <PageTitle className="pb-0">
-          Content
-        </PageTitle>
+        <PageTitle>Content</PageTitle>
 
         <Button
           className="group max-md:p-4"

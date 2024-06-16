@@ -21,6 +21,9 @@ interface EditPageProps {
 export default async function EditPage({ params }: EditPageProps) {
   const prisma = new PrismaClient()
 
+  if (Number.isNaN(+params.id))
+    notFound()
+
   const contentType = await prisma.contentTypes.findUnique({
     where: {
       id: +params.id,
@@ -36,7 +39,7 @@ export default async function EditPage({ params }: EditPageProps) {
   return (
     <>
       <Link
-        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
+        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:mb-4"
         href="/cms/content-types"
       >
         <Icon
@@ -48,7 +51,9 @@ export default async function EditPage({ params }: EditPageProps) {
         Back to overview
       </Link>
 
-      <PageTitle>
+      <PageTitle
+        className="mb-8 max-md:mb-4"
+      >
         Edit
         {' '}
         <i>{contentType?.title}</i>

@@ -9,7 +9,7 @@ export default function PageTitle({ children, className }: PageTitleProps) {
   return (
     <h2
       className={cn(
-        'mb-8 text-4xl font-semibold',
+        'text-4xl font-semibold',
         className,
       )}
     >

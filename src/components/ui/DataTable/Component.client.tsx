@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
               value={(table.getColumn(filter?.field)?.getFilterValue() as string) ?? ''}
               onChange={event =>
                 table.getColumn(filter?.field)?.setFilterValue(event.target.value)}
-              className="max-w-sm"
+              className="max-w-sm max-md:max-w-full"
             />
           </div>
           )

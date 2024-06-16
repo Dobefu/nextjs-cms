@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <div
-      className="flex flex-wrap gap-8"
+      className="flex flex-wrap gap-8 max-md:gap-4"
     >
       <BaseImage
         src={userData.image ?? ''}
@@ -38,7 +38,11 @@ export default async function Page() {
       />
 
       <div>
-        <PageTitle>{userData.name}</PageTitle>
+        <PageTitle
+          className="mb-8 max-md:mb-4"
+        >
+          {userData.name}
+        </PageTitle>
 
         <div>
           <b>Email:</b>

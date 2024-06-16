@@ -21,6 +21,9 @@ interface CreateProps {
 export default async function Create({ params }: CreateProps) {
   const prisma = new PrismaClient()
 
+  if (Number.isNaN(+params.id))
+    notFound()
+
   const content = await prisma.content.findUnique({
     where: {
       id: +params.id,
@@ -49,7 +52,7 @@ export default async function Create({ params }: CreateProps) {
   return (
     <>
       <Link
-        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
+        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:mb-4"
         href="/cms/content"
       >
         <Icon
@@ -61,7 +64,9 @@ export default async function Create({ params }: CreateProps) {
         Back to content overview
       </Link>
 
-      <PageTitle>
+      <PageTitle
+        className="mb-8 max-md:mb-4"
+      >
         Edit
         {' '}
         <i>{content.title}</i>

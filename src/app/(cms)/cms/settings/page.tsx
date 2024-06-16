@@ -8,6 +8,10 @@ export const metadata: Metadata = {
 
 export default function Settings() {
   return (
-    <PageTitle>SETTINGS</PageTitle>
+    <PageTitle
+      className="mb-8 max-md:mb-4"
+    >
+      SETTINGS
+    </PageTitle>
   )
 }

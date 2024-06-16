@@ -27,7 +27,7 @@ export default async function CreateOverview() {
   return (
     <>
       <Link
-        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
+        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:mb-4"
         href="/cms/content"
       >
         <Icon
@@ -39,7 +39,11 @@ export default async function CreateOverview() {
         Back to overview
       </Link>
 
-      <PageTitle>Create Content</PageTitle>
+      <PageTitle
+        className="mb-8 max-md:mb-4"
+      >
+        Create Content
+      </PageTitle>
 
       <Overview
         contentTypes={contentTypes}

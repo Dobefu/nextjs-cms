@@ -41,11 +41,11 @@ export default function Overview({ contentTypes }: OverviewProps) {
       cell: ({ row }) => {
         return (
           <Link
-            className="-m-4 block"
+            className="-m-4 block max-md:-mx-2"
             href={`/cms/content/create/${row.original.id}`}
           >
             <div
-              className="p-4"
+              className="p-4 max-md:px-2"
             >
               {row.original.title}
             </div>

@@ -120,6 +120,8 @@ export default function Client({ content }: OverviewProps) {
               'ms-auto',
               row.original.published ? 'text-success' : 'text-destructive',
             )}
+            aria-label={row.original.published ? 'Published' : 'Not published'}
+            aria-hidden={false}
             icon={row.original.published ? checkIcon : closeIcon}
             ssr
           />
@@ -174,7 +176,9 @@ export default function Client({ content }: OverviewProps) {
 
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Are you sure you want to delete this content entity?</DialogTitle>
+                  <DialogTitle>
+                    Are you sure you want to delete this content entity?
+                  </DialogTitle>
                   <DialogDescription asChild>
                     <DeletionWarning
                       id={row.original.id}
