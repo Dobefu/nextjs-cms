@@ -3,8 +3,14 @@ import { notFound } from 'next/navigation'
 import chevronLeftIcon from '@iconify/icons-mdi/chevron-left'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
+import type { Metadata } from 'next'
 import EditForm from '../../components/EditForm/Component.client'
 import PageTitle from '@/components/molecules/PageTitle/Component'
+
+export const metadata: Metadata = {
+  title: 'Edit Content Type | NextJS CMS',
+  description: 'Edit your existing content type.',
+}
 
 interface EditPageProps {
   params: {

@@ -1,9 +1,15 @@
 import plusIcon from '@iconify/icons-mdi/plus'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import Overview from './components/Overview/Component'
 import PageTitle from '@/components/molecules/PageTitle/Component'
 import Button from '@/components/ui/Button/Component.client'
+
+export const metadata: Metadata = {
+  title: 'Content Types | NextJS CMS',
+  description: '',
+}
 
 export default function ContentTypes() {
   return (

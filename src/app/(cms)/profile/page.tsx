@@ -1,7 +1,13 @@
 import { PrismaClient } from '@prisma/client'
+import type { Metadata } from 'next'
 import { auth } from '@/auth'
 import PageTitle from '@/components/molecules/PageTitle/Component'
 import BaseImage from '@/components/ui/Image/Component'
+
+export const metadata: Metadata = {
+  title: 'Profile | NextJS CMS',
+  description: '',
+}
 
 export default async function Page() {
   const session = await auth()
