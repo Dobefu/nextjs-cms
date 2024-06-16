@@ -4,7 +4,7 @@ import Client from './Component.client'
 export default async function Overview() {
   const prisma = new PrismaClient()
 
-  const contentTypes = await prisma.contentTypes.findMany({
+  const content = await prisma.content.findMany({
     select: {
       id: true,
       title: true,
@@ -13,11 +13,11 @@ export default async function Overview() {
     take: 200,
   })
     .then((values) => {
-      return values.map((contentType) => {
+      return values.map((entity) => {
         return {
-          id: contentType.id,
-          title: contentType.title,
-          lastmod: contentType.updatedAt.getTime(),
+          id: entity.id,
+          title: entity.title,
+          lastmod: entity.updatedAt.getTime(),
         }
       })
     })
@@ -27,7 +27,7 @@ export default async function Overview() {
 
   return (
     <Client
-      contentTypes={contentTypes}
+      content={content}
     />
   )
 }

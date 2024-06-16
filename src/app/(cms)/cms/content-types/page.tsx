@@ -1,4 +1,4 @@
-import plusIcon from '@iconify/icons-mdi/plus'
+import plusIcon from '@iconify/icons-mdi/plus-bold'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -15,28 +15,31 @@ export default function ContentTypes() {
   return (
     <>
       <div
-        className="flex items-center justify-between gap-4 pb-8"
+        className="mb-8 flex items-center justify-between gap-4"
       >
         <PageTitle className="pb-0">
           Content Types
         </PageTitle>
 
         <Button
-          className="group"
+          className="group max-md:p-4"
           variant="success"
-          size="icon"
-          aria-label="Add content type"
           asChild
         >
           <Link
-            className="shrink-0"
+            className="flex shrink-0 gap-2"
             href="/cms/content-types/create"
           >
             <Icon
-              className="size-5 transition-transform group-hover:scale-125"
+              className="size-4 transition-transform group-hover:scale-125"
               icon={plusIcon}
               ssr
             />
+            <span
+              className="font-semibold max-md:sr-only"
+            >
+              Create content type
+            </span>
           </Link>
         </Button>
       </div>

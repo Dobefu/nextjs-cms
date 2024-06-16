@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/Input/Component.client'
 import Button from '@/components/ui/Button/Component.client'
 import { toast } from '@/hooks/useToast'
+import { DialogClose } from '@/components/ui/Dialog/Component.client'
 
 interface DeletionWarningProps {
   id: number
@@ -91,12 +92,28 @@ export default function DeletionWarning({ id, title, onSubmit }: DeletionWarning
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            variant="destructive"
+
+          <div
+            className="flex justify-between"
           >
-            Delete
-          </Button>
+            <Button
+              type="submit"
+              variant="destructive"
+            >
+              Delete
+            </Button>
+
+            <DialogClose
+              asChild
+            >
+              <Button
+                type="button"
+                variant="outline"
+              >
+                Cancel
+              </Button>
+            </DialogClose>
+          </div>
         </form>
       </Form>
     </>

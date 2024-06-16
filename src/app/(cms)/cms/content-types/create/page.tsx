@@ -14,7 +14,7 @@ export default function Create() {
   return (
     <>
       <Link
-        className="flex items-center gap-3 pb-8 text-muted-foreground max-md:pb-4"
+        className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
         href="/cms/content-types"
       >
         <Icon

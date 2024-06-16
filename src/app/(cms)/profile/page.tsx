@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 import PageTitle from '@/components/molecules/PageTitle/Component'
 import BaseImage from '@/components/ui/Image/Component'
@@ -16,14 +17,14 @@ export default async function Page() {
     return
 
   const prisma = new PrismaClient()
-  const userData = await prisma.user.findFirst({
+  const userData = await prisma.users.findFirst({
     where: {
       email: session.user.email,
     },
   })
 
   if (!userData)
-    return
+    return redirect('/logout')
 
   return (
     <div

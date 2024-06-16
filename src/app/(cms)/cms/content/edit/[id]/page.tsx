@@ -1,29 +1,41 @@
-import { PrismaClient } from '@prisma/client'
-import { notFound } from 'next/navigation'
 import chevronLeftIcon from '@iconify/icons-mdi/chevron-left'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import type { Metadata } from 'next'
+import { PrismaClient } from '@prisma/client'
+import { notFound } from 'next/navigation'
 import EditForm from '../../components/EditForm/Component.client'
 import PageTitle from '@/components/molecules/PageTitle/Component'
 
 export const metadata: Metadata = {
-  title: 'Edit Content Type | NextJS CMS',
-  description: 'Edit your existing content type.',
+  title: 'Create Content | NextJS CMS',
+  description: 'Create a new content entity.',
 }
 
-interface EditPageProps {
+interface CreateProps {
   params: {
-    id: number
+    id: string
   }
 }
 
-export default async function EditPage({ params }: EditPageProps) {
+export default async function Create({ params }: CreateProps) {
   const prisma = new PrismaClient()
+
+  const content = await prisma.content.findUnique({
+    where: {
+      id: +params.id,
+    },
+  })
+
+  if (!content)
+    notFound()
 
   const contentType = await prisma.contentTypes.findUnique({
     where: {
-      id: +params.id,
+      id: content.id,
+    },
+    select: {
+      title: true,
     },
   })
     .catch(() => {
@@ -37,7 +49,7 @@ export default async function EditPage({ params }: EditPageProps) {
     <>
       <Link
         className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
-        href="/cms/content-types"
+        href="/cms/content/create"
       >
         <Icon
           className="size-4 shrink-0"
@@ -45,20 +57,23 @@ export default async function EditPage({ params }: EditPageProps) {
           ssr
         />
 
-        Back to overview
+        Back to content type selection
       </Link>
 
       <PageTitle>
-        Edit
+        Create
         {' '}
-        <i>{contentType?.title}</i>
+        <i>{contentType.title}</i>
+        {' '}
+        content
       </PageTitle>
 
       <EditForm
         action="edit"
         id={+params.id}
         defaultValues={{
-          title: contentType.title,
+          title: content.title,
+          published: content.published,
         }}
       />
     </>

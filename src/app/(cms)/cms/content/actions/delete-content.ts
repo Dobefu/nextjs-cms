@@ -2,7 +2,7 @@
 
 import { PrismaClient } from '@prisma/client'
 
-export default async function deleteContentType(
+export default async function deleteContent(
   id: number,
 ): Promise<{
   success: boolean
@@ -10,7 +10,7 @@ export default async function deleteContentType(
 }> {
   const prisma = new PrismaClient()
 
-  const result = await prisma.contentTypes.delete({
+  const result = await prisma.content.delete({
     where: {
       id,
     },

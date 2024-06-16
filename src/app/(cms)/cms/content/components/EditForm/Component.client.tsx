@@ -8,12 +8,13 @@ import saveIcon from '@iconify/icons-mdi/content-save'
 import loadingIcon from '@iconify/icons-mdi/loading'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/navigation'
-import upsertContentType from '../../actions/upsert-content-type'
+import upsertContent from '../../actions/upsert-content'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form/Component'
 import { Input } from '@/components/ui/Input/Component.client'
 import Button from '@/components/ui/Button/Component.client'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/useToast'
+import { Switch } from '@/components/ui/Switch/Component.client'
 
 interface EditFormProps {
   id?: number
@@ -29,6 +30,7 @@ const formSchema = z.object({
   }).max(64, {
     message: 'The title may not be longer than 64 characters.',
   }).trim(),
+  published: z.boolean(),
 })
 
 export type EditFormSchema = z.infer<typeof formSchema>
@@ -42,6 +44,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
+      published: false,
       ...defaultValues,
     },
   })
@@ -52,7 +55,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    const { success, data, error } = await upsertContentType(values, id)
+    const { success, data, error } = await upsertContent(values, id)
 
     const toastData: {
       title: string
@@ -65,21 +68,21 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
 
     if (success) {
       if (action === 'create')
-        toastData.title = 'The content type has been created!'
+        toastData.title = 'The content has been created!'
       if (action === 'edit')
-        toastData.title = 'The content type has been updated!'
+        toastData.title = 'The content has been updated!'
     }
     else {
       if (action === 'create')
-        toastData.title = 'Could not create the content type'
+        toastData.title = 'Could not create the content'
       if (action === 'edit')
-        toastData.title = 'Could not update the content type'
+        toastData.title = 'Could not update the content'
 
       toastData.description = 'Please try again later'
       toastData.variant = 'destructive'
 
       if (error === 'P2002') {
-        toastData.title = 'A content type with this name already exists'
+        toastData.title = 'A content entity with this name already exists'
         toastData.description = ''
       }
     }
@@ -90,7 +93,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
       setIsLoading(false)
 
       if (data) {
-        router.push(`/cms/content-types/edit/${data.id}`)
+        router.push(`/cms/content/edit/${data.id}`)
         router.refresh()
       }
 
@@ -119,37 +122,70 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
 
               <FormControl>
                 <Input
-                  placeholder="Basic page"
                   required
                   autoFocus
                   {...field}
                 />
               </FormControl>
               <FormDescription>
-                The title of the content type.
+                The title of the content entity.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button
-          className="sm:mr-auto"
-          type="submit"
-          disabled={isLoading}
+        <div
+          className="flex flex-wrap-reverse items-center gap-8 max-sm:gap-4"
         >
-          <Icon
-            className={cn(
-              'me-2 size-4',
-              isLoading ? 'animate-spin' : '',
-            )}
-            icon={isLoading ? loadingIcon : saveIcon}
-            ssr
-          />
+          <Button
+            className="max-sm:flex-1"
+            type="submit"
+            disabled={isLoading}
+          >
+            <Icon
+              className={cn(
+                'me-2 size-4',
+                isLoading ? 'animate-spin' : '',
+              )}
+              icon={isLoading ? loadingIcon : saveIcon}
+              ssr
+            />
 
-          {action === 'create' ? 'Create' : undefined}
-          {action === 'edit' ? 'Update' : undefined}
-        </Button>
+            {action === 'create' ? 'Create' : undefined}
+            {action === 'edit' ? 'Update' : undefined}
+          </Button>
+
+          <FormField
+            control={form.control}
+            name="published"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div
+                    className="flex items-center gap-4"
+                  >
+                    <Switch
+                      id="published"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      {...field}
+                      value={field.value ? 'on' : 'off'}
+                    />
+
+                    <FormLabel
+                      className="cursor-pointer"
+                      htmlFor="published"
+                    >
+                      Published
+                    </FormLabel>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       </form>
     </Form>
   )

@@ -14,7 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       const prisma = new PrismaClient()
 
-      await prisma.user.upsert({
+      await prisma.users.upsert({
         where: {
           email: user.email,
         },

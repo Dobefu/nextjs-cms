@@ -7,20 +7,59 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model User {
+model Users {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+  role  Role    @default(USER)
   image String?
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  ContentType ContentTypes[]
+  Content     Content[]
+}
+
+model Settings {
+  id Int @id @default(autoincrement())
+}
+
+model ContentTypes {
+  id       Int    @id @default(autoincrement())
+  title    String @unique
+  author   Users? @relation(fields: [authorId], references: [id])
+  authorId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model ContentType {
+model Content {
+  id       Int    @id @default(autoincrement())
+  title    String @unique
+  author   Users? @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Languages {
   id    Int     @id @default(autoincrement())
   title String  @unique
+  dir   LangDir @default(LTR)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum LangDir {
+  LTR
+  RTL
 }

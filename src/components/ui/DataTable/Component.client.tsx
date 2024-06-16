@@ -15,6 +15,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import type { ReactNode } from 'react'
 import { useState } from 'react'
 import {
   Table,
@@ -35,7 +36,7 @@ interface DataTableProps<TData, TValue> {
     placeholder?: string
     field: string
   }
-  noResultsText?: string
+  noResultsText?: ReactNode | string
 }
 
 export function DataTable<TData, TValue>({
