@@ -8,6 +8,9 @@ export default async function upsertContentType(
   id?: number,
 ): Promise<{
   success: boolean
+  data?: {
+    id: number
+  }
   error?: unknown
 }> {
   const prisma = new PrismaClient()
@@ -18,7 +21,7 @@ export default async function upsertContentType(
 
   if (!id) {
     try {
-      await prisma.contentType.create({
+      const { id } = await prisma.contentType.create({
         data: {
           ...fieldValues,
         },
@@ -26,12 +29,15 @@ export default async function upsertContentType(
 
       return {
         success: true,
+        data: {
+          id,
+        },
       }
     }
-    catch (e) {
+    catch (e: any) {
       return {
         success: false,
-        error: e,
+        error: e?.code ?? e.toString(),
       }
     }
   }
@@ -50,10 +56,10 @@ export default async function upsertContentType(
       success: true,
     }
   }
-  catch (e) {
+  catch (e: any) {
     return {
       success: false,
-      error: e,
+      error: e?.code ?? e.toString(),
     }
   }
 }

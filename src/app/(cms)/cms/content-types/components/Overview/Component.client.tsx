@@ -6,6 +6,7 @@ import type { ColumnDef, RowData, SortingColumn } from '@tanstack/react-table'
 import sortIcon from '@iconify/icons-mdi/sort'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import DeletionWarning from '../DeletionWarning/Component.client'
 import Button from '@/components/ui/Button/Component.client'
 import {
   DropdownMenu,
@@ -16,6 +17,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu/Component.client'
 import { DataTable } from '@/components/ui/DataTable/Component.client'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/Dialog/Component.client'
 
 interface ContentType {
   id: number
@@ -29,6 +38,7 @@ interface OverviewProps {
 
 export default function Client({ contentTypes }: OverviewProps) {
   const [isClient, setIsClient] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
@@ -94,38 +104,58 @@ export default function Client({ contentTypes }: OverviewProps) {
           <div
             className="text-right"
           >
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                asChild
-              >
-                <Button
-                  variant="ghost"
-                  className="size-8 p-0"
+            <Dialog open={isOpen} onOpenChange={setOpen}>
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  asChild
                 >
-                  <span className="sr-only">Open menu</span>
-                  <Icon
-                    className="size-4"
-                    icon={dotsVerticalIcon}
-                    ssr
-                  />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link
-                    href={`/cms/content-types/edit/${row.original.id}`}
-                    className="cursor-pointer"
+                  <Button
+                    variant="ghost"
+                    className="size-8 p-0"
                   >
-                    Edit content type
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Delete content type
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    <span className="sr-only">Open menu</span>
+                    <Icon
+                      className="size-4"
+                      icon={dotsVerticalIcon}
+                      ssr
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+                  <DropdownMenuSeparator />
+
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href={`/cms/content-types/edit/${row.original.id}`}
+                      className="cursor-pointer"
+                    >
+                      Edit content type
+                    </Link>
+                  </DropdownMenuItem>
+
+                  <DialogTrigger asChild>
+                    <DropdownMenuItem>
+                      Delete content type
+                    </DropdownMenuItem>
+                  </DialogTrigger>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Are you sure you want to delete this?</DialogTitle>
+                  <DialogDescription asChild>
+                    <DeletionWarning
+                      id={row.original.id}
+                      title={row.original.title}
+                      onSubmit={() => setOpen(false)}
+                    />
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         )
       },

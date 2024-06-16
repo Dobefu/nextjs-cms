@@ -7,6 +7,7 @@ import { useState } from 'react'
 import saveIcon from '@iconify/icons-mdi/content-save'
 import loadingIcon from '@iconify/icons-mdi/loading'
 import { Icon } from '@iconify/react'
+import { useRouter } from 'next/navigation'
 import upsertContentType from '../../actions/upsert-content-type'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form/Component'
 import { Input } from '@/components/ui/Input/Component.client'
@@ -33,6 +34,8 @@ const formSchema = z.object({
 export type EditFormSchema = z.infer<typeof formSchema>
 
 export default function EditForm({ id, action, defaultValues }: EditFormProps) {
+  const router = useRouter()
+
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,7 +48,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    const { success } = await upsertContentType(values, id)
+    const { success, data, error } = await upsertContentType(values, id)
 
     const toastData: {
       title: string
@@ -70,9 +73,27 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
 
       toastData.description = 'Please try again later'
       toastData.variant = 'destructive'
+
+      if (error === 'P2002') {
+        toastData.title = 'A content type with this name already exists'
+        toastData.description = ''
+      }
     }
 
     toast(toastData)
+
+    if (action === 'create') {
+      setIsLoading(false)
+
+      if (data) {
+        router.push(`/cms/content-types/edit/${data.id}`)
+        router.refresh()
+      }
+
+      return
+    }
+
+    router.refresh()
 
     // Leave the submit button disabled for a second, to prevent spamming.
     await new Promise(resolve => setTimeout(resolve, 1000))
