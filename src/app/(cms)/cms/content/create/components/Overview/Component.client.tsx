@@ -32,7 +32,7 @@ export default function Overview({ contentTypes }: OverviewProps) {
 
             <Icon
               icon={sortIcon}
-              className="ml-2 size-4"
+              className="ms-2 size-4"
               ssr
             />
           </Button>

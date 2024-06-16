@@ -92,7 +92,7 @@ export default function Client({ isExpanded }: SidebarMenuProps) {
                 {isExpanded
                   ? (
                     <Icon
-                      className="size-[1.2rem] shrink-0 transition-transform group-hover:translate-x-1 max-lg:hidden"
+                      className="size-[1.2rem] shrink-0 transition-transform group-hover:translate-x-1 max-lg:hidden rtl:rotate-180 rtl:group-hover:-translate-x-1"
                       icon={chevronRightIcon}
                       ssr
                     />

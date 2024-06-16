@@ -26,7 +26,7 @@ export default function Layout({
         href="/"
       >
         <Icon
-          className="size-4"
+          className="size-4 rtl:rotate-180"
           icon={chevronLeftIcon}
           ssr
         />

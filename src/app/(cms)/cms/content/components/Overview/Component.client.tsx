@@ -4,6 +4,8 @@ import dotsVerticalIcon from '@iconify/icons-mdi/dots-vertical'
 import { Icon } from '@iconify/react'
 import type { ColumnDef, RowData, SortingColumn } from '@tanstack/react-table'
 import sortIcon from '@iconify/icons-mdi/sort'
+import checkIcon from '@iconify/icons-mdi/check-bold'
+import closeIcon from '@iconify/icons-mdi/close-bold'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import DeletionWarning from '../DeletionWarning/Component.client'
@@ -25,9 +27,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog/Component.client'
+import { cn } from '@/lib/utils'
 
 interface Content {
   id: number
+  published: boolean
   title: string
   lastmod: number
 }
@@ -59,7 +63,7 @@ export default function Client({ content }: OverviewProps) {
 
             <Icon
               icon={sortIcon}
-              className="ml-2 size-4"
+              className="ms-2 size-4"
               ssr
             />
           </Button>
@@ -81,7 +85,7 @@ export default function Client({ content }: OverviewProps) {
 
             <Icon
               icon={sortIcon}
-              className="ml-2 size-4"
+              className="ms-2 size-4"
               ssr
             />
           </Button>
@@ -98,11 +102,36 @@ export default function Client({ content }: OverviewProps) {
       },
     },
     {
+      id: 'published',
+      accessorKey: 'published',
+      header: () => {
+        return (
+          <div
+            className="text-end"
+          >
+            Published
+          </div>
+        )
+      },
+      cell: ({ row }) => {
+        return (
+          <Icon
+            className={cn(
+              'ms-auto',
+              row.original.published ? 'text-success' : 'text-destructive',
+            )}
+            icon={row.original.published ? checkIcon : closeIcon}
+            ssr
+          />
+        )
+      },
+    },
+    {
       id: 'actions',
       cell: ({ row }) => {
         return (
           <div
-            className="text-right"
+            className="text-end"
           >
             <Dialog open={isOpen} onOpenChange={setOpen}>
               <DropdownMenu>

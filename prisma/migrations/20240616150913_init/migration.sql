@@ -36,6 +36,7 @@ CREATE TABLE `Content` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `authorId` INTEGER NOT NULL,
+    `contentTypeId` INTEGER NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -61,3 +62,6 @@ ALTER TABLE `ContentTypes` ADD CONSTRAINT `ContentTypes_authorId_fkey` FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE `Content` ADD CONSTRAINT `Content_authorId_fkey` FOREIGN KEY (`authorId`) REFERENCES `Users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Content` ADD CONSTRAINT `Content_contentTypeId_fkey` FOREIGN KEY (`contentTypeId`) REFERENCES `ContentTypes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

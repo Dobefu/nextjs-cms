@@ -5,7 +5,9 @@ import type { EditFormSchema } from '../components/EditForm/Component.client'
 import { auth } from '@/auth'
 
 export default async function upsertContent(
-  values: EditFormSchema,
+  values: EditFormSchema & {
+    contentType?: number
+  },
   id?: number,
 ): Promise<{
   success: boolean
@@ -30,16 +32,31 @@ export default async function upsertContent(
     },
   })
 
+  if (!user) {
+    return {
+      success: false,
+      error: 'no_author_user',
+    }
+  }
+
   const fieldValues = {
     title: values.title,
     published: values.published,
   }
 
   if (!id) {
+    if (!values.contentType) {
+      return {
+        success: false,
+        error: 'no_content_type',
+      }
+    }
+
     try {
       const { id } = await prisma.content.create({
         data: {
-          authorId: user?.id,
+          authorId: user.id,
+          contentTypeId: values.contentType,
           ...fieldValues,
         },
       })

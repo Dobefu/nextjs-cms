@@ -31,7 +31,7 @@ export default async function CreateOverview() {
         href="/cms/content"
       >
         <Icon
-          className="size-4 shrink-0"
+          className="size-4 shrink-0 rtl:rotate-180"
           icon={chevronLeftIcon}
           ssr
         />

@@ -32,9 +32,10 @@ export default async function Create({ params }: CreateProps) {
 
   const contentType = await prisma.contentTypes.findUnique({
     where: {
-      id: content.id,
+      id: content.contentTypeId,
     },
     select: {
+      id: true,
       title: true,
     },
   })
@@ -49,15 +50,15 @@ export default async function Create({ params }: CreateProps) {
     <>
       <Link
         className="mb-8 flex items-center gap-3 text-muted-foreground max-md:pb-4"
-        href="/cms/content/create"
+        href="/cms/content"
       >
         <Icon
-          className="size-4 shrink-0"
+          className="size-4 shrink-0 rtl:rotate-180"
           icon={chevronLeftIcon}
           ssr
         />
 
-        Back to content type selection
+        Back to content overview
       </Link>
 
       <PageTitle>
@@ -71,6 +72,7 @@ export default async function Create({ params }: CreateProps) {
       <EditForm
         action="edit"
         id={+params.id}
+        contentType={contentType.id}
         defaultValues={{
           title: content.title,
           published: content.published,

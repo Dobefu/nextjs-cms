@@ -18,6 +18,7 @@ import { Switch } from '@/components/ui/Switch/Component.client'
 
 interface EditFormProps {
   id?: number
+  contentType: number
   action: 'create' | 'edit'
   defaultValues?: z.infer<typeof formSchema>
 }
@@ -35,7 +36,7 @@ const formSchema = z.object({
 
 export type EditFormSchema = z.infer<typeof formSchema>
 
-export default function EditForm({ id, action, defaultValues }: EditFormProps) {
+export default function EditForm({ id, contentType, action, defaultValues }: EditFormProps) {
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -54,8 +55,12 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
   }, [form])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const formValues = {
+      contentType,
+      ...values,
+    }
     setIsLoading(true)
-    const { success, data, error } = await upsertContent(values, id)
+    const { success, data, error } = await upsertContent(formValues, id)
 
     const toastData: {
       title: string

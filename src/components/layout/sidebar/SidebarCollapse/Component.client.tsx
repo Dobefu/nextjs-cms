@@ -35,7 +35,7 @@ export default function Client({ isOpenInitial }: SidebarCollapseProps) {
       aria-label={sidebarOpen ? 'Collapse menu' : 'Expand menu'}
     >
       <Icon
-        className="size-[1.2rem]"
+        className="size-[1.2rem] rtl:rotate-180"
         icon={sidebarOpen ? chevronLeftIcon : chevronRightIcon}
         ssr
       />

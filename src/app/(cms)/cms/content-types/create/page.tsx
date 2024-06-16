@@ -18,7 +18,7 @@ export default function Create() {
         href="/cms/content-types"
       >
         <Icon
-          className="size-4 shrink-0"
+          className="size-4 shrink-0 rtl:rotate-180"
           icon={chevronLeftIcon}
           ssr
         />

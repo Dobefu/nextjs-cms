@@ -24,7 +24,7 @@ const Label = React.forwardRef<
     {(props.required ?? false)
       ? (
         <span
-          className="pl-1 text-destructive"
+          className="ps-1 text-destructive"
         >
           *
         </span>

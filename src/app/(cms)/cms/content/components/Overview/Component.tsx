@@ -7,6 +7,7 @@ export default async function Overview() {
   const content = await prisma.content.findMany({
     select: {
       id: true,
+      published: true,
       title: true,
       updatedAt: true,
     },
@@ -16,6 +17,7 @@ export default async function Overview() {
       return values.map((entity) => {
         return {
           id: entity.id,
+          published: entity.published,
           title: entity.title,
           lastmod: entity.updatedAt.getTime(),
         }

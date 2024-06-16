@@ -59,7 +59,7 @@ export default function Client({ contentTypes }: OverviewProps) {
 
             <Icon
               icon={sortIcon}
-              className="ml-2 size-4"
+              className="ms-2 size-4"
               ssr
             />
           </Button>
@@ -81,7 +81,7 @@ export default function Client({ contentTypes }: OverviewProps) {
 
             <Icon
               icon={sortIcon}
-              className="ml-2 size-4"
+              className="ms-2 size-4"
               ssr
             />
           </Button>
@@ -102,7 +102,7 @@ export default function Client({ contentTypes }: OverviewProps) {
       cell: ({ row }) => {
         return (
           <div
-            className="text-right"
+            className="text-end"
           >
             <Dialog open={isOpen} onOpenChange={setOpen}>
               <DropdownMenu>
@@ -145,7 +145,7 @@ export default function Client({ contentTypes }: OverviewProps) {
 
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Are you sure you want to delete this?</DialogTitle>
+                  <DialogTitle>Are you sure you want to delete this content type?</DialogTitle>
                   <DialogDescription asChild>
                     <DeletionWarning
                       id={row.original.id}

@@ -43,7 +43,7 @@ export default async function Create({ params }: CreateProps) {
         href="/cms/content/create"
       >
         <Icon
-          className="size-4 shrink-0"
+          className="size-4 shrink-0 rtl:rotate-180"
           icon={chevronLeftIcon}
           ssr
         />
@@ -61,6 +61,7 @@ export default async function Create({ params }: CreateProps) {
 
       <EditForm
         action="create"
+        contentType={+params.contentType}
       />
     </>
   )

@@ -134,7 +134,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
         />
 
         <Button
-          className="sm:mr-auto"
+          className="sm:me-auto"
           type="submit"
           disabled={isLoading}
         >
