@@ -1,12 +1,20 @@
+'use client'
+
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> { }
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
+    const id = React.useId()
+
+    if (!props.id)
+      props.id = id
+
     return (
       <input
         type={type}

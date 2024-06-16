@@ -62,11 +62,9 @@ export default async function Create({ params }: CreateProps) {
       </Link>
 
       <PageTitle>
-        Create
+        Edit
         {' '}
-        <i>{contentType.title}</i>
-        {' '}
-        content
+        <i>{content.title}</i>
       </PageTitle>
 
       <EditForm
