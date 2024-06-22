@@ -28,6 +28,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           image: user.image,
         },
       })
+        .catch((e: Error) => {
+          console.error(e.message)
+        })
     },
   },
 })

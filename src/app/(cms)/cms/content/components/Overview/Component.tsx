@@ -23,7 +23,8 @@ export default async function Overview() {
         }
       })
     })
-    .catch(() => {
+    .catch((e: Error) => {
+      console.error(e.message)
       return []
     })
 

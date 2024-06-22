@@ -29,6 +29,10 @@ export default async function upsertContentType(
       email: session.user.email,
     },
   })
+    .catch((e: Error) => {
+      console.error(e.message)
+      return null
+    })
 
   const fieldValues = {
     title: values.title,

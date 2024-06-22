@@ -22,6 +22,10 @@ export default async function Page() {
       email: session.user.email,
     },
   })
+    .catch((e: Error) => {
+      console.error(e.message)
+      return null
+    })
 
   if (!userData)
     return redirect('/logout')
