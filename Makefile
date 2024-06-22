@@ -36,9 +36,8 @@ db-init: _pnpm
 	@npx prisma db seed
 
 db-reset: _pnpm
-	@npx prisma migrate reset
+	@NODE_ENV=development npx prisma migrate reset
 	@npx prisma generate
-	@npx prisma db seed
 
 db-migrate: _pnpm
 	@npx prisma migrate dev

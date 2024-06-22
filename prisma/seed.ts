@@ -4,6 +4,25 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
+  await prisma.users.createMany({
+    data: {
+      name: 'Anonymous user',
+      email: '',
+    },
+  })
+
+  await prisma.$executeRaw`UPDATE Users set id=0 WHERE id=1;`
+  await prisma.$executeRaw`ALTER TABLE Users AUTO_INCREMENT=1;`
+
+  if (process.env.NODE_ENV !== 'development')
+    return
+
+  await prisma.contentTypes.create({
+    data: {
+      title: 'Basic page',
+      authorId: 0,
+    },
+  })
 }
 
 main()

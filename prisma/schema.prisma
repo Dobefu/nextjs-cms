@@ -57,6 +57,13 @@ model Languages {
   updatedAt DateTime @updatedAt
 }
 
+model Fields {
+  id    Int       @id @default(autoincrement())
+  title String    @unique
+  type  FieldType
+  data  Json
+}
+
 enum Role {
   USER
   ADMIN
@@ -65,4 +72,8 @@ enum Role {
 enum LangDir {
   LTR
   RTL
+}
+
+enum FieldType {
+  TEXT
 }
