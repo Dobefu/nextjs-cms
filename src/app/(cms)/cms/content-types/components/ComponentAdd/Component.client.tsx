@@ -17,6 +17,8 @@ interface ComponentAddProps {
 export default function ComponentAdd({ index, onAdd }: ComponentAddProps) {
   const fieldTypes = [
     {
+      title: 'Text',
+      type: 'TEXT',
       Component: Text,
     },
   ]
@@ -58,14 +60,14 @@ export default function ComponentAdd({ index, onAdd }: ComponentAddProps) {
           {fieldTypes.map(fieldType => (
             <DrawerClose
               asChild
-              key={fieldType.Component.displayName}
+              key={fieldType.title}
             >
               <Button
                 onClick={() => onAdd(fieldType.Component, index)}
                 variant="link"
                 className="border"
               >
-                {fieldType.Component.displayName}
+                {fieldType.title}
               </Button>
             </DrawerClose>
           ))}

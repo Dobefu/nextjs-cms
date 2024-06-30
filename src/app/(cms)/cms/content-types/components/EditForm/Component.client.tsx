@@ -42,8 +42,7 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false)
-  const [_fields, _setFields] = useState(defaultValues?.fields ?? [])
-  const [fieldComponents, setFieldComponents] = useState<React.FC[]>([])
+  const [fields, setFields] = useState<React.FC[]>([])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -140,12 +139,14 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
           )}
         />
 
-        <FormLabel>Fields</FormLabel>
-        <FieldOverview
-          fields={fieldComponents}
-          onFieldInsert={(index, component) => setFieldComponents(fieldComponents.toSpliced(index, 0, component))}
-          onFieldReorder={setFieldComponents}
-        />
+        <div>
+          <FormLabel>Fields</FormLabel>
+          <FieldOverview
+            fields={fields}
+            onFieldInsert={(index, component) => setFields(fields.toSpliced(index, 0, component))}
+            onFieldReorder={setFields}
+          />
+        </div>
 
         <Button
           className="sm:me-auto"

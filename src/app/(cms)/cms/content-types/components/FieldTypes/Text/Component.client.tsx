@@ -6,9 +6,6 @@ interface TextProps {
 
 export default function Text(_props: TextProps) {
   return (
-    <>TEST</>
+    <>TEXT</>
   )
 }
-
-Text.displayName = 'Text'
-Text.type = 'TEXT'
