@@ -8,7 +8,9 @@ import saveIcon from '@iconify/icons-mdi/content-save'
 import loadingIcon from '@iconify/icons-mdi/loading'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/navigation'
+import type { Fields } from '@prisma/client'
 import upsertContentType from '../../actions/upsert-content-type'
+import FieldOverview from '../FieldOverview/Component.client'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form/Component'
 import { Input } from '@/components/ui/Input/Component.client'
 import Button from '@/components/ui/Button/Component.client'
@@ -22,13 +24,16 @@ interface EditFormProps {
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: 'The title is required.',
+  title: z.string({
+    required_error: 'The title is required.',
   }).min(3, {
     message: 'The title must be at least 3 characters.',
   }).max(64, {
     message: 'The title may not be longer than 64 characters.',
   }).trim(),
+  fields: z.array(
+    z.custom<Fields>(),
+  ),
 })
 
 export type EditFormSchema = z.infer<typeof formSchema>
@@ -37,6 +42,8 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false)
+  const [_fields, _setFields] = useState(defaultValues?.fields ?? [])
+  const [fieldComponents, setFieldComponents] = useState<React.FC[]>([])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -131,6 +138,13 @@ export default function EditForm({ id, action, defaultValues }: EditFormProps) {
               <FormMessage />
             </FormItem>
           )}
+        />
+
+        <FormLabel>Fields</FormLabel>
+        <FieldOverview
+          fields={fieldComponents}
+          onFieldInsert={(index, component) => setFieldComponents(fieldComponents.toSpliced(index, 0, component))}
+          onFieldReorder={setFieldComponents}
         />
 
         <Button

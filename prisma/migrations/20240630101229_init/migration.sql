@@ -67,6 +67,15 @@ CREATE TABLE `Fields` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `_ContentTypesToFields` (
+    `A` INTEGER NOT NULL,
+    `B` INTEGER NOT NULL,
+
+    UNIQUE INDEX `_ContentTypesToFields_AB_unique`(`A`, `B`),
+    INDEX `_ContentTypesToFields_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `ContentTypes` ADD CONSTRAINT `ContentTypes_authorId_fkey` FOREIGN KEY (`authorId`) REFERENCES `Users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -75,3 +84,9 @@ ALTER TABLE `Content` ADD CONSTRAINT `Content_authorId_fkey` FOREIGN KEY (`autho
 
 -- AddForeignKey
 ALTER TABLE `Content` ADD CONSTRAINT `Content_contentTypeId_fkey` FOREIGN KEY (`contentTypeId`) REFERENCES `ContentTypes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_ContentTypesToFields` ADD CONSTRAINT `_ContentTypesToFields_A_fkey` FOREIGN KEY (`A`) REFERENCES `ContentTypes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_ContentTypesToFields` ADD CONSTRAINT `_ContentTypesToFields_B_fkey` FOREIGN KEY (`B`) REFERENCES `Fields`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

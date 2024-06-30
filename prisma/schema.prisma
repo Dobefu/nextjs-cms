@@ -25,9 +25,10 @@ model Settings {
 }
 
 model ContentTypes {
-  id       Int    @id @default(autoincrement())
-  title    String @unique
-  author   Users? @relation(fields: [authorId], references: [id])
+  id       Int      @id @default(autoincrement())
+  title    String   @unique
+  fields   Fields[]
+  author   Users?   @relation(fields: [authorId], references: [id])
   authorId Int
 
   createdAt DateTime  @default(now())
@@ -62,6 +63,8 @@ model Fields {
   title String    @unique
   type  FieldType
   data  Json
+
+  ContentTypes ContentTypes[]
 }
 
 enum Role {

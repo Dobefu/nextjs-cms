@@ -4,6 +4,13 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
+  await prisma.languages.create({
+    data: {
+      title: 'English',
+      dir: 'LTR',
+    },
+  })
+
   await prisma.users.createMany({
     data: {
       name: 'Anonymous user',

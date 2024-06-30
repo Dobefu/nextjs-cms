@@ -28,6 +28,9 @@ export default async function EditPage({ params }: EditPageProps) {
     where: {
       id: +params.id,
     },
+    include: {
+      fields: true,
+    },
   })
     .catch(() => {
       return undefined
@@ -64,6 +67,7 @@ export default async function EditPage({ params }: EditPageProps) {
         id={+params.id}
         defaultValues={{
           title: contentType.title,
+          fields: contentType.fields,
         }}
       />
     </>
